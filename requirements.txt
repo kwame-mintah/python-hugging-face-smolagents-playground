@@ -1,0 +1,10 @@
+datasets>=3.6.0
+duckduckgo-search>=8.0.4
+faiss-cpu>=1.11.0
+fsspec==2025.3.2
+huggingface-hub~=0.33.1
+langchain-community>=0.3.26
+langchain>=0.3.26
+openai>=1.93.0
+sentence-transformers>=5.0.0
+smolagents>=1.19.0
