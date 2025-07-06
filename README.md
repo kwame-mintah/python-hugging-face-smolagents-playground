@@ -45,6 +45,6 @@ uv run main.py
 
 The following environment variables are used by this project.
 
-| Environment Variable | Description                                                   | Default Value |
-|----------------------|---------------------------------------------------------------|---------------|
-| HUGGING_FACE_TOKEN   | The token to identify you on [hf.co](https://huggingface.co/) |               |
+| Environment Variable           | Description                                                   | Default Value |
+|--------------------------------|---------------------------------------------------------------|---------------|
+| HF_TOKEN OR HUGGING_FACE_TOKEN | The token to identify you on [hf.co](https://huggingface.co/) |               |

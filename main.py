@@ -11,7 +11,7 @@ from smolagents import (
     LiteLLMModel,
 )
 
-login(token=os.getenv("HUGGING_FACE_TOKEN"), new_session=True)
+login(token=(os.getenv("HF_TOKEN") or os.getenv("HUGGING_FACE_TOKEN")), new_session=True)
 logger = logging.getLogger(__name__)
 
 OLLAMA_BASE_API_URL = os.getenv("OLLAMA_BASE_API_URL", "http://localhost:11434")
