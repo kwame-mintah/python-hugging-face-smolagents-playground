@@ -17,3 +17,8 @@ dependencies = [
     "sentence-transformers>=5.0.0",
     "smolagents>=1.19.0",
 ]
+
+[project.optional-dependencies]
+dev = [
+    "black~=25.1.0",
+]
