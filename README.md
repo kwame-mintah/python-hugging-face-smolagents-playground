@@ -11,13 +11,34 @@ and how it can be utilised for various tasks and create a multi-agent workflow.
 
 1. [Docker for desktop](https://docs.docker.com/desktop/)
 2. [Ollama](https://ollama.com/download)
+3. [uv](https://docs.astral.sh/uv/#installation)
 
-# Usage
+# Usage via `pip`
 
 1. Install python packages used for the project
 
 ```pycon
 pip install -r requirements.txt
+```
+
+2. Run the application
+
+```pycon
+python main.py
+```
+
+# Usage via `uv`
+
+1. Install python packages used for the project
+
+```pycon
+uv sync
+```
+
+2. Run the application
+
+```pycon
+uv run main.py
 ```
 
 ## Environment variables
