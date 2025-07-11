@@ -1,0 +1,31 @@
+services:
+  ollama:
+    image: ollama/ollama:${OLLAMA_TAG:-latest}
+    volumes:
+      - ollama:/root/.ollama
+    ports:
+      - "11434:11434"
+    networks:
+      - app
+    restart: always
+
+  ollama-setup:
+    image: curlimages/curl:${OLLAMA_TAG:-latest}
+    command:
+      - -X
+      - POST
+      - http://ollama:11434/api/pull
+      - -d
+      - '{"name": "llama3:instruct"}' # mistral:instruct OR mistral:instruct OR phi3:instruct
+      - -H
+      - "Content-Type: application/json"
+    networks:
+      - app
+    depends_on:
+      - ollama
+
+volumes:
+  ollama:
+
+networks:
+  app:
