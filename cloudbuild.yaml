@@ -3,3 +3,5 @@ steps:
   args: [ 'build', '-t', 'europe-west2-docker.pkg.dev/syntax-errors/ai-agent-docker-image-id-1:tag1', '.' ]
 images:
 - 'europe-west2-docker.pkg.dev/syntax-errors/ai-agent-docker-image-id-1:tag1'
+options:
+  logging: CLOUD_LOGGING_ONLY
