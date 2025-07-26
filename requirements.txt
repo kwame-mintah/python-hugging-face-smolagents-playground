@@ -1,7 +1,7 @@
 datasets>=3.6.0
 duckduckgo-search>=8.0.4
 faiss-cpu>=1.11.0
-fsspec==2025.3.2
+fsspec==2023.5.0
 huggingface-hub~=0.33.1
 langchain-community>=0.3.26
 langchain>=0.3.26
