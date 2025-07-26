@@ -20,6 +20,7 @@ RUN pip install --upgrade pip && \
     uv sync --locked
 
 # Copy application code to `/code/app/`
+COPY config.py /code/app/
 COPY main.py /code/app/
 
 # Run application using `uv`
