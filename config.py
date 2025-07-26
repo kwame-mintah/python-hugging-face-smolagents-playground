@@ -15,8 +15,9 @@ class EnvironmentVariables(BaseSettings):
         default="""
     Find me some restaurants to eat at tonight in London.
     Use web_search to get restaurant data.
-    Summarize your findings using return_final_answer("...").
-    Wrap your Python code in <code>...</code> tags only.
+    Authorized imports are: ['random', 'collections', 're', 'unicodedata', 'datetime',
+    'queue', 'stat', 'time', 'math', 'statistics', 'itertools'].
+    Code snippet should follow this regex pattern <code>(.*?)</code> 
     End your output after the final answer.
     """,
     )

@@ -10,6 +10,7 @@ from smolagents import (
     DuckDuckGoSearchTool,
     LiteLLMModel,
     FinalAnswerTool,
+    ToolCallingAgent,
 )
 
 from config import settings
@@ -46,16 +47,23 @@ def playground():
         trust_remote_code=True,
     )
 
-    search_tool = DuckDuckGoSearchTool()
-    final_answer_tool = FinalAnswerTool()
-
-    agent = CodeAgent(
-        tools=[image_generation_tool, search_tool, final_answer_tool], model=model
+    web_search_agent = ToolCallingAgent(
+        tools=[DuckDuckGoSearchTool(), FinalAnswerTool()],
+        model=model,
+        max_steps=10,
+        name="web_search_agent",
+        description="Runs web searches for you and provides answers using the final answer tool",
     )
 
-    task = settings.AGENT_TASK
+    manager_agent = CodeAgent(
+        tools=[image_generation_tool, FinalAnswerTool()],
+        model=model,
+        managed_agents=[web_search_agent],
+        additional_authorized_imports=["time", "numpy", "pandas"],
+        description="Manages a web_search_agent that performs searches on its behalf, working together to complete a task",
+    )
 
-    result = agent.run(task=task, stream=False)
+    result = manager_agent.run(task=settings.AGENT_TASK, stream=False)
 
     return result
 
