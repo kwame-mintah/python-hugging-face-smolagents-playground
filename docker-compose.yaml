@@ -32,7 +32,7 @@ services:
 #              capabilities: [ gpu ]
 
   ollama-setup:
-    image: curlimages/curl:${OLLAMA_TAG:-latest}
+    image: curlimages/curl:${CURLIMAGES:-latest}
     command:
       - -X
       - POST
