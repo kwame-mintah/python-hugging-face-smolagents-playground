@@ -515,6 +515,7 @@ dependencies = [
     { name = "langchain-community" },
     { name = "litellm" },
     { name = "openai" },
+    { name = "pydantic-settings" },
     { name = "sentence-transformers" },
     { name = "smolagents" },
 ]
@@ -536,6 +537,7 @@ requires-dist = [
     { name = "langchain-community", specifier = ">=0.3.26" },
     { name = "litellm", specifier = ">=1.74.0" },
     { name = "openai", specifier = ">=1.93.0" },
+    { name = "pydantic-settings", specifier = ">=2.10.1" },
     { name = "sentence-transformers", specifier = ">=5.0.0" },
     { name = "smolagents", specifier = ">=1.19.0" },
 ]
