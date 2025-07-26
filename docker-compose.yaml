@@ -12,14 +12,6 @@ services:
       - app
     depends_on:
       - ollama
-#    Enable GPU support using host machine
-#    deploy:
-#      resources:
-#        reservations:
-#          devices:
-#            - driver: nvidia
-#              count: all
-#              capabilities: [ gpu ]
 
   ollama:
     image: ollama/ollama:${OLLAMA_TAG:-latest}
@@ -30,6 +22,14 @@ services:
     networks:
       - app
     restart: always
+#    Enable GPU support using host machine
+#    deploy:
+#      resources:
+#        reservations:
+#          devices:
+#            - driver: nvidia
+#              count: all
+#              capabilities: [ gpu ]
 
   ollama-setup:
     image: curlimages/curl:${OLLAMA_TAG:-latest}
