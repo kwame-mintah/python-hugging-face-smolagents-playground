@@ -37,6 +37,7 @@ def playground():
         model = LiteLLMModel(
             model_id=settings.OLLAMA_MODEL_NAME,
             api_base=settings.OLLAMA_BASE_API_URL,
+            num_ctx=4096,
         )
         logger.info(
             f"Initialised model via Ollama: {settings.OLLAMA_MODEL_NAME}, ensure model has been downloaded"
