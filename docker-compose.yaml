@@ -16,7 +16,7 @@ services:
       - POST
       - http://ollama:11434/api/pull
       - -d
-      - '{"name": "llama3:instruct"}' # mistral:instruct OR mistral:instruct OR phi3:instruct
+      - '{"name": "llama3:instruct"}' # mistral:instruct OR mistral:instruct OR phi3:instruct OR llama3.2
       - -H
       - "Content-Type: application/json"
     networks:

@@ -1,5 +1,6 @@
 import logging
 import os
+import sys
 
 import requests
 from distutils.util import strtobool
@@ -17,6 +18,9 @@ login(
     token=(os.getenv("HF_TOKEN") or os.getenv("HUGGING_FACE_TOKEN")), new_session=True
 )
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+
 
 OLLAMA_BASE_API_URL = os.getenv("OLLAMA_BASE_API_URL", "http://localhost:11434")
 
@@ -26,6 +30,8 @@ def playground():
     response.
     :return: Final result
     """
+
+    logger.info("hello world")
     if strtobool(os.getenv("USE_HUGGING_FACE_INTERFACE", False)):
         model = InferenceClientModel(model_id="Qwen/Qwen2.5-72B-Instruct")
         logger.info("Initialised model via hugging face, will incur costs")
@@ -37,26 +43,32 @@ def playground():
         )
         logger.info("Initialised model via Ollama, ensure model has been downloaded")
 
-    image_generation_tool = load_tool(
-        repo_id="m-ric/text-to-image", trust_remote_code=True
-    )
-
     search_tool = DuckDuckGoSearchTool()
     final_answer_tool = FinalAnswerTool()
 
+    instructions = """ 
+    You are an expert Product Manager who excels in writing well structured and clear requirements for software projects.
+    Your input will be a high level ideas for a software project and lay out a detailed requirements for how to create this software using best practises.
+    Use web_search to find examples of good requirements if you need.
+    You output will only be text.
+
+
+    """
+
     agent = CodeAgent(
-        tools=[image_generation_tool, search_tool, final_answer_tool], model=model
+        tools=[search_tool, final_answer_tool], model=model, instructions=instructions
     )
 
     task = """
-    Find me some restaurants to eat at tonight in London.
-    Use web_search to get restaurant data.
-    Summarize your findings using return_final_answer("...").
+    Create a TODO web application
+    Output your findings using return_final_answer("...").
     Wrap your Python code in <code>...</code> tags only.
     End your output after the final answer.
     """
 
     result = agent.run(task=task, stream=False)
+    
+    logger.info(f"{result}")
 
     return result
 
