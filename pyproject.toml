@@ -14,6 +14,7 @@ dependencies = [
     "langchain>=0.3.26",
     "litellm>=1.74.0",
     "openai>=1.93.0",
+    "pydantic-settings>=2.10.1",
     "sentence-transformers>=5.0.0",
     "smolagents>=1.19.0",
 ]

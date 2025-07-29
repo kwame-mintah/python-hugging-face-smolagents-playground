@@ -1,4 +1,18 @@
 services:
+  agent:
+    build:
+      context: .
+      platforms:
+        - "linux/amd64"
+    platform: "linux/amd64"
+    environment:
+      - OLLAMA_BASE_API_URL=http://ollama:11434
+      - HF_TOKEN=
+    networks:
+      - app
+    depends_on:
+      - ollama
+
   ollama:
     image: ollama/ollama:${OLLAMA_TAG:-latest}
     volumes:
@@ -8,15 +22,23 @@ services:
     networks:
       - app
     restart: always
+#    Enable GPU support using host machine
+#    deploy:
+#      resources:
+#        reservations:
+#          devices:
+#            - driver: nvidia
+#              count: all
+#              capabilities: [ gpu ]
 
   ollama-setup:
-    image: curlimages/curl:${OLLAMA_TAG:-latest}
+    image: curlimages/curl:${CURLIMAGES_TAG:-latest}
     command:
       - -X
       - POST
       - http://ollama:11434/api/pull
       - -d
-      - '{"name": "llama3:instruct"}' # mistral:instruct OR mistral:instruct OR phi3:instruct
+      - '{"name": "mistral:7b"}' # mistral:instruct OR llama3:instruct OR phi3:instruct OR
       - -H
       - "Content-Type: application/json"
     networks:
