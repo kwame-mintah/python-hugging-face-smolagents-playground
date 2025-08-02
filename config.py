@@ -8,7 +8,7 @@ class EnvironmentVariables(BaseSettings):
     )
     OLLAMA_MODEL_NAME: str = Field(
         description="The Ollama model to be used for inference",
-        default="ollama/gemma3n:e4b",
+        default="ollama/mistral:7b",
     )
     AGENT_TASK: str = Field(
         description="The task the agent needs to complete",
