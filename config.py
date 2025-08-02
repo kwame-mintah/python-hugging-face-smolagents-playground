@@ -8,18 +8,11 @@ class EnvironmentVariables(BaseSettings):
     )
     OLLAMA_MODEL_NAME: str = Field(
         description="The Ollama model to be used for inference",
-        default="ollama/mistral:7b",
+        default="ollama/gemma3n:e4b",
     )
     AGENT_TASK: str = Field(
         description="The task the agent needs to complete",
-        default="""
-    Find me some restaurants to eat at tonight in London.
-    Use web_search to get restaurant data.
-    Authorized imports are: ['random', 'collections', 're', 'unicodedata', 'datetime',
-    'queue', 'stat', 'time', 'math', 'statistics', 'itertools'].
-    Code snippet should follow this regex pattern <code>(.*?)</code> 
-    End your output after the final answer.
-    """,
+        default="Create a hello world app, using FastAPI.",
     )
     USE_HUGGING_FACE_INTERFACE: bool = Field(
         description="Whether to make a request to hugging face for model inference",
