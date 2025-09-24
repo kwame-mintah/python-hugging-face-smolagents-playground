@@ -310,7 +310,6 @@ dependencies = [
     { name = "numpy" },
     { name = "packaging" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e7/9a/e33fc563f007924dd4ec3c5101fe5320298d6c13c158a24a9ed849058569/faiss_cpu-1.11.0.tar.gz", hash = "sha256:44877b896a2b30a61e35ea4970d008e8822545cb340eca4eff223ac7f40a1db9", size = 70218 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/3b/d3/7178fa07047fd770964a83543329bb5e3fc1447004cfd85186ccf65ec3ee/faiss_cpu-1.11.0-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:356437b9a46f98c25831cdae70ca484bd6c05065af6256d87f6505005e9135b9", size = 3313807 },
     { url = "https://files.pythonhosted.org/packages/9e/71/25f5f7b70a9f22a3efe19e7288278da460b043a3b60ad98e4e47401ed5aa/faiss_cpu-1.11.0-cp312-cp312-macosx_14_0_x86_64.whl", hash = "sha256:c4a3d35993e614847f3221c6931529c0bac637a00eff0d55293e1db5cb98c85f", size = 7913537 },
@@ -532,14 +531,14 @@ requires-dist = [
     { name = "duckduckgo-search", specifier = ">=8.0.4" },
     { name = "faiss-cpu", specifier = ">=1.11.0" },
     { name = "fsspec", specifier = "==2025.3.0" },
-    { name = "huggingface-hub", specifier = "~=0.33.1" },
+    { name = "huggingface-hub", specifier = ">=0.31.2" },
     { name = "langchain", specifier = ">=0.3.26" },
     { name = "langchain-community", specifier = ">=0.3.26" },
     { name = "litellm", specifier = ">=1.74.0" },
     { name = "openai", specifier = ">=1.93.0" },
     { name = "pydantic-settings", specifier = ">=2.10.1" },
     { name = "sentence-transformers", specifier = ">=5.0.0" },
-    { name = "smolagents", specifier = ">=1.19.0" },
+    { name = "smolagents", specifier = ">=1.21.3" },
 ]
 provides-extras = ["dev"]
 
@@ -1934,7 +1933,7 @@ wheels = [
 
 [[package]]
 name = "smolagents"
-version = "1.19.0"
+version = "1.21.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "huggingface-hub" },
@@ -1944,9 +1943,9 @@ dependencies = [
     { name = "requests" },
     { name = "rich" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/0a/84/685cc60ebf97499f8066e0645983fe4697ff6fc5edba03d0b6be9c350a51/smolagents-1.19.0.tar.gz", hash = "sha256:e05426d59950f6ee4d082b5704f3831c17dbef11fa739a1dfaae0ccbaee175fc", size = 186042 }
+sdist = { url = "https://files.pythonhosted.org/packages/1e/de/c1ee32344af18e483e77e8e63228e05f7f87bcf0bf39316e06930e7b12a4/smolagents-1.21.3.tar.gz", hash = "sha256:cfebebbb2d21df3fe79c64ee6f5057ec2a96adac3c121a4afc94069a76fd262e", size = 202304 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6f/5c/2e1207d9dc17e31dfe2c67af34b3379f767351ef3cb55fd88677196439a4/smolagents-1.19.0-py3-none-any.whl", hash = "sha256:e33be79a85059613a771e29af8f24f1ed2f0d0d84c02bb1c503d655f1de5f4d3", size = 138209 },
+    { url = "https://files.pythonhosted.org/packages/71/d6/3ac80e2be428913cd2d67be7e119e2d91683a61529f6bc5f23e608dddc00/smolagents-1.21.3-py3-none-any.whl", hash = "sha256:60692ee2bcfd4893929cc68add795887231e37f06ff2854c8e20b2daee09f32b", size = 145423 },
 ]
 
 [[package]]
