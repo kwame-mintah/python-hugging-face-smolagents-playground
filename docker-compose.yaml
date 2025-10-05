@@ -6,8 +6,10 @@ services:
         - "linux/amd64"
     platform: "linux/amd64"
     environment:
+      - LLM_PROVIDER=ollama
       - OLLAMA_BASE_API_URL=http://ollama:11434
-      - HF_TOKEN=
+      - HF_TOKEN=${HUGGING_FACE_TOKEN}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
     networks:
       - app
     depends_on:
