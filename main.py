@@ -23,6 +23,15 @@ logger = logging.getLogger(__name__)
 def get_inference_model(
     model_provider: str,
 ) -> Union[LiteLLMModel, InferenceClientModel]:
+    """
+    Get the pre-configured LLM model provider.
+
+    :param model_provider:
+    :type model_provider:
+    :return:
+    :rtype:
+    """
+
     provider_name_mapping: dict = {
         "hugging-face": InferenceClientModel(
             model_id=settings.HUGGING_FACE_INFERENCE_MODEL
@@ -31,6 +40,9 @@ def get_inference_model(
             model_id=settings.OLLAMA_MODEL_NAME,
             api_base=settings.OLLAMA_BASE_API_URL,
             num_ctx=4096,
+            validate_model_on_init=(
+                True if settings.LLM_INFERENCE_PROVIDER == "ollama" else False
+            ),
         ),
         "gemini": LiteLLMModel(
             model_id=f"google/{settings.GOOGLE_GEMINI_LLM_MODEL}",
@@ -103,4 +115,4 @@ def playground(model_provider: str):
 
 
 if __name__ == "__main__":
-    playground(model_provider=settings.LLM_PROVIDER)
+    playground(model_provider=settings.LLM_INFERENCE_PROVIDER)

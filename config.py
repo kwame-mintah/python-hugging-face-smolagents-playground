@@ -7,7 +7,7 @@ class EnvironmentVariables(BaseSettings):
         description="The task the agent needs to complete",
         default="Create a hello world app, using FastAPI.",
     )
-    LLM_PROVIDER: str = Field(
+    LLM_INFERENCE_PROVIDER: str = Field(
         description="The inference model provider to use",
         default="ollama",
     )
