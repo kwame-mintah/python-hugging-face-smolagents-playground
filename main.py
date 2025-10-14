@@ -1,7 +1,7 @@
 import logging
 import os
+from typing import Union
 
-import requests
 from huggingface_hub import login
 from smolagents import (
     load_tool,
@@ -17,35 +17,62 @@ from smolagents import (
 from config import settings
 from prompts import SoftwareDevelopmentTeamPrompts
 
-login(
-    token=(os.getenv("HF_TOKEN") or os.getenv("HUGGING_FACE_TOKEN")), new_session=True
-)
 logger = logging.getLogger(__name__)
 
 
-def playground():
+def get_inference_model(
+    model_provider: str,
+) -> Union[LiteLLMModel, InferenceClientModel]:
+    """
+    Get the pre-configured LLM model provider.
+
+    :param model_provider:
+    :type model_provider:
+    :return:
+    :rtype:
+    """
+
+    provider_name_mapping: dict = {
+        "hugging-face": InferenceClientModel(
+            model_id=settings.HUGGING_FACE_INFERENCE_MODEL
+        ),
+        "ollama": LiteLLMModel(
+            model_id=settings.OLLAMA_MODEL_NAME,
+            api_base=settings.OLLAMA_BASE_API_URL,
+            num_ctx=4096,
+            validate_model_on_init=(
+                True if settings.LLM_INFERENCE_PROVIDER == "ollama" else False
+            ),
+        ),
+        "gemini": LiteLLMModel(
+            model_id=f"google/{settings.GOOGLE_GEMINI_LLM_MODEL}",
+        ),
+    }
+    model = provider_name_mapping.get(model_provider, None)
+
+    if not model:
+        raise ValueError(f"Unable to map LLM model with provider: {model_provider}")
+
+    if isinstance(model, InferenceClientModel):
+        login(
+            token=(os.getenv("HF_TOKEN") or os.getenv("HUGGING_FACE_TOKEN")),
+            new_session=True,
+        )
+        logger.info(
+            f"Initialised model {settings.HUGGING_FACE_INFERENCE_MODEL} via hugging face, will incur costs"
+        )
+
+    return model
+
+
+def playground(model_provider: str):
     """
     Initial playground to give the agent with a task and get a
     response.
     :return: Final result
     """
-    if settings.USE_HUGGING_FACE_INTERFACE:
-        hugging_face_inference_model = InferenceClientModel(
-            model_id=settings.HUGGING_FACE_INFERENCE_MODEL
-        )
-        logger.info(
-            f"Initialised model {settings.HUGGING_FACE_INFERENCE_MODEL} via hugging face, will incur costs"
-        )
-    else:
-        requests.get(url=settings.OLLAMA_BASE_API_URL).raise_for_status()
-        model = LiteLLMModel(
-            model_id=settings.OLLAMA_MODEL_NAME,
-            api_base=settings.OLLAMA_BASE_API_URL,
-            num_ctx=4096,
-        )
-        logger.info(
-            f"Initialised model via Ollama: {settings.OLLAMA_MODEL_NAME}, ensure model has been downloaded"
-        )
+
+    model = get_inference_model(model_provider=model_provider)
 
     image_generation_tool = load_tool(
         repo_id=settings.HUGGING_FACE_IMAGE_GENERATION_TOOL,
@@ -54,7 +81,7 @@ def playground():
 
     software_engineer_agent = CodeAgent(
         tools=[DuckDuckGoSearchTool(), FinalAnswerTool(), image_generation_tool],
-        model=model if model else hugging_face_inference_model,
+        model=model,
         additional_authorized_imports=["*"],
         name="software_engineer_agent",
         description="Creates code snippet for the user to run",
@@ -63,7 +90,7 @@ def playground():
 
     product_owner_agent = ToolCallingAgent(
         tools=[UserInputTool()],
-        model=model if model else hugging_face_inference_model,
+        model=model,
         managed_agents=[software_engineer_agent],
         max_steps=10,
         name="product_owner_agent",
@@ -73,7 +100,7 @@ def playground():
 
     project_manager_agent = CodeAgent(
         tools=[],
-        model=model if model else hugging_face_inference_model,
+        model=model,
         managed_agents=[product_owner_agent, software_engineer_agent],
     )
 
@@ -88,4 +115,4 @@ def playground():
 
 
 if __name__ == "__main__":
-    playground()
+    playground(model_provider=settings.LLM_INFERENCE_PROVIDER)

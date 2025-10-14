@@ -13,7 +13,7 @@ and how it can be utilised for various tasks and create a multi-agent workflow.
 2. [Ollama](https://ollama.com/download)
 3. [uv](https://docs.astral.sh/uv/#installation)
 
-# Usage via `pip`
+### Usage via `pip`
 
 1. Install python packages used for the project
 
@@ -27,7 +27,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-# Usage via `uv`
+### Usage via `uv`
 
 1. Install python packages used for the project
 
@@ -45,6 +45,13 @@ uv run main.py
 
 The following environment variables are used by this project.
 
-| Environment Variable           | Description                                                   | Default Value |
-|--------------------------------|---------------------------------------------------------------|---------------|
-| HF_TOKEN OR HUGGING_FACE_TOKEN | The token to identify you on [hf.co](https://huggingface.co/) |               |
+| Environment Variable               | Description                                                    | Default Value                            |
+| ---------------------------------- | -------------------------------------------------------------- | ---------------------------------------- |
+| AGENT_TASK                         | The task the agent needs to complete                           | Create a hello world app, using FastAPI. |
+| LLM_PROVIDER                       | The inference model provider to use                            | ollama                                   |
+| OLLAMA_BASE_API_URL                | The ollama server URL                                          | http://localhost:11434                   |
+| OLLAMA_MODEL_NAME                  | The Ollama model to be used for inference                      | ollama/mistral:7b                        |
+| GOOGLE_API_KEY                     | Your Google Gemini API key                                     |                                          |
+| GOOGLE_GEMINI_LLM_MODEL            | The Gemini model to use                                        | gemini-2.5-flash                         |
+| HUGGING_FACE_IMAGE_GENERATION_TOOL | The name of the hugging face repository tool for text to image | m-ric/text-to-image                      |
+| HUGGING_FACE_INFERENCE_MODEL       | The name of the hugging face repository for model inference    | Qwen/Qwen2.5-72B-Instruct                |

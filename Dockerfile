@@ -1,5 +1,5 @@
 ARG BASE_IMAGE=python:3.12.0-slim-bullseye
-FROM --platform=linux/amd64 $BASE_IMAGE
+FROM $BASE_IMAGE
 
 # Use the uv binary
 COPY --from=ghcr.io/astral-sh/uv:0.6.6 /uv /bin/uv
@@ -16,7 +16,7 @@ COPY uv.lock /code/uv.lock
 
 # Install uv via pip, then install all packages.
 # https://docs.astral.sh/uv/reference/cli/#uv-sync
-RUN pip install --upgrade pip && \
+RUN pip install --no-cache-dir --upgrade pip==25.2 && \
     uv sync --locked
 
 # Copy application code to `/code/app/`
