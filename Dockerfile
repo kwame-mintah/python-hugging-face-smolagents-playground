@@ -20,8 +20,7 @@ RUN pip install --no-cache-dir --upgrade pip==25.2 && \
     uv sync --locked
 
 # Copy application code to `/code/app/`
-COPY config.py /code/app/
-COPY main.py /code/app/
+COPY config.py main.py prompts.py /code/app/
 
 # Run application using `uv`
 CMD ["uv", "run", "/code/app/main.py"]
