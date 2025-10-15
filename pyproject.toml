@@ -16,7 +16,7 @@ dependencies = [
     "openai>=1.93.0",
     "pydantic-settings>=2.10.1",
     "sentence-transformers>=5.0.0",
-    "smolagents>=1.21.3",
+    "smolagents[toolkit]>=1.21.3",
 ]
 
 [project.optional-dependencies]

@@ -8,6 +8,7 @@ services:
     environment:
       - LLM_INFERENCE_PROVIDER=ollama
       - OLLAMA_BASE_API_URL=http://ollama:11434
+      - OLLAMA_MODEL_NAME=ollama/mistral-nemo:12b-instruct-2407-q4_0
       - HF_TOKEN=${HUGGING_FACE_TOKEN}
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
     networks:
@@ -42,7 +43,7 @@ services:
       - POST
       - http://ollama:11434/api/pull
       - -d
-      - '{"name": "mistral:7b"}' # mistral:instruct OR llama3:instruct OR phi3:instruct OR
+      - '{"name": "mistral-nemo:12b-instruct-2407-q4_0"}' # mistral:instruct OR llama3:instruct OR phi3:instruct OR
       - -H
       - "Content-Type: application/json"
     networks:
